@@ -31,5 +31,7 @@ public class ParticipantService {
         participantRepository.deleteById(id);
     }
 
+    public void deleteAll(){ participantRepository.deleteAll(); }
+
 
 }

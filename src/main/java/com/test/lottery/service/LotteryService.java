@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Executor;
 
 @Service
 public class LotteryService {
@@ -35,8 +36,9 @@ public class LotteryService {
             String participantName = participants.get(winnerId).getName();
             Winner winner = Winner.builder().name(participantName).prize_amount(prizeAmount).build();
             winnerRepository.save(winner);
+            participantRepository.deleteAll();
             return winner;
-
         }
     }
+
 }

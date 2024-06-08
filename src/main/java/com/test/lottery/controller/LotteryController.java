@@ -20,8 +20,10 @@ public class LotteryController {
 
 
     @GetMapping("/lottery/start")
-    public ResponseEntity<Winner> startLottery() {
+    public ResponseEntity<?> startLottery() {
         Winner winner = lotteryService.decideWinner();
+        if(winner == null)
+            return ResponseEntity.ok("Not enough participants to start the lottery");
         return ResponseEntity.ok(winner);
     }
 
