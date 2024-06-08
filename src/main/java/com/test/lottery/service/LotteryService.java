@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.Executor;
 
 @Service
 public class LotteryService {
@@ -31,8 +30,8 @@ public class LotteryService {
         }
         else
         {
-            int prizeAmount = new Random().nextInt(1000) + 1;
-            int winnerId = new Random().nextInt(numOfParticipants);
+            int prizeAmount = RandUtils.getRandInt(1000);
+            int winnerId = RandUtils.getRandInt(numOfParticipants - 1);
             String participantName = participants.get(winnerId).getName();
             Winner winner = Winner.builder().name(participantName).prize_amount(prizeAmount).build();
             winnerRepository.save(winner);
