@@ -21,7 +21,7 @@ public class LotteryService {
         this.winnerRepository = winnerRepository;
     }
 
-    public Winner decideWinner() {
+    public Participant decideWinner() {
         List<Participant> participants = participantRepository.findAll();
         int numOfParticipants = participants.size();
         if (numOfParticipants < 2)
@@ -30,14 +30,16 @@ public class LotteryService {
         }
         else
         {
-            int prizeAmount = RandUtils.getRandInt(1000);
-            int winnerId = RandUtils.getRandInt(numOfParticipants - 1);
-            String participantName = participants.get(winnerId).getName();
-            Winner winner = Winner.builder().name(participantName).prize_amount(prizeAmount).build();
-            winnerRepository.save(winner);
+            Integer winnerId = RandUtils.getRandInt(numOfParticipants - 1);
+            Participant winner = participants.get(winnerId);
             participantRepository.deleteAll();
             return winner;
         }
+    }
+
+    public Integer decidePrize()
+    {
+        return RandUtils.getRandInt(1000);
     }
 
 }

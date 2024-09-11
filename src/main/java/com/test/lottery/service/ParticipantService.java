@@ -15,10 +15,6 @@ public class ParticipantService {
 
     private final ParticipantRepository participantRepository;
 
-    public Participant findById(Long id){
-        return participantRepository.getOne(id);
-    }
-
     public List<Participant> findAll() {
         return participantRepository.findAll();
     }
@@ -27,11 +23,7 @@ public class ParticipantService {
         participantRepository.save(participant);
     }
 
-    public void deleteById(Long id){
-        participantRepository.deleteById(id);
-    }
 
-    public void deleteAll(){ participantRepository.deleteAll(); }
 
 
 }

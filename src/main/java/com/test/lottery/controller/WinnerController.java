@@ -3,6 +3,7 @@ package com.test.lottery.controller;
 
 import com.test.lottery.model.Winner;
 import com.test.lottery.service.WinnerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import java.util.List;
 @Controller
 public class WinnerController {
 
+    @Autowired
     private final WinnerService winnerService;
 
     public WinnerController(WinnerService winnerService) {
