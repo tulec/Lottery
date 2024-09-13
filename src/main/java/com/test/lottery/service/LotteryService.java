@@ -1,45 +1,37 @@
 package com.test.lottery.service;
 
-
-import com.test.lottery.model.Winner;
 import com.test.lottery.model.Participant;
 import com.test.lottery.repository.ParticipantRepository;
-import com.test.lottery.repository.WinnerRepository;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Random;
 
 @Service
 public class LotteryService {
 
     private final ParticipantRepository participantRepository;
-    private final WinnerRepository winnerRepository;
+    private final RandUtils randUtils;
 
-    public LotteryService(ParticipantRepository participantRepository, WinnerRepository winnerRepository) {
+    public LotteryService(ParticipantRepository participantRepository, RandUtils randUtils) {
         this.participantRepository = participantRepository;
-        this.winnerRepository = winnerRepository;
+        this.randUtils = randUtils;
     }
 
+    @Transactional
     public Participant decideWinner() {
         List<Participant> participants = participantRepository.findAll();
-        int numOfParticipants = participants.size();
-        if (numOfParticipants < 2)
-        {
+        if (participants.size() < 2) {
             return null;
         }
-        else
-        {
-            Integer winnerId = RandUtils.getRandInt(numOfParticipants - 1);
-            Participant winner = participants.get(winnerId);
-            participantRepository.deleteAll();
-            return winner;
-        }
+        Integer winnerId = randUtils.getRandInt(participants.size());
+        Participant winner = participants.get(winnerId);
+        participantRepository.deleteAll();
+        return winner;
     }
 
-    public Integer decidePrize()
-    {
-        return RandUtils.getRandInt(1000);
+    public Integer decidePrize() {
+        return randUtils.getRandInt(1000);
     }
-
 }

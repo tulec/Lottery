@@ -2,10 +2,13 @@ package com.test.lottery.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 @Data
 @Entity
 @Table(name = "participants")
+@NoArgsConstructor
 public class Participant {
 
     @Id
@@ -20,6 +23,4 @@ public class Participant {
 
     @Column(name = "city")
     private String city;
-
-
 }

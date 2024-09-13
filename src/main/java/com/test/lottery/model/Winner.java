@@ -1,17 +1,16 @@
 package com.test.lottery.model;
 
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @Entity
 @Table(name = "winners")
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class Winner {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,10 +19,5 @@ public class Winner {
     private String name;
 
     @Column(name = "prize_amount")
-    private Integer prize_amount;
-
-    public Winner() {
-
-    }
-
+    private Integer prizeAmount;
 }

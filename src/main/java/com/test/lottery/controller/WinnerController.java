@@ -1,28 +1,27 @@
 package com.test.lottery.controller;
 
-
 import com.test.lottery.model.Winner;
 import com.test.lottery.service.WinnerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/lottery")
 public class WinnerController {
 
-    @Autowired
     private final WinnerService winnerService;
 
     public WinnerController(WinnerService winnerService) {
         this.winnerService = winnerService;
     }
 
-    @GetMapping(value = "/lottery/winners")
-    public ResponseEntity<List<Winner>> findAll(){
+    @GetMapping("/winners")
+    public ResponseEntity<List<Winner>> findAll() {
         List<Winner> winners = winnerService.findAll();
         return ResponseEntity.ok(winners);
     }
